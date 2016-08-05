@@ -94,7 +94,7 @@ next:
 	pcir = map + offset + header->pcir_offset;
 
 	if (strncmp(pcir->sig, "PCIR", 4)) {
-		printf("Invalid PCIR signature: %c%c%c%c\n", 
+		printf("Invalid PCIR signature: %c%c%c%c\n",
 		       pcir->sig[0], pcir->sig[1], pcir->sig[2], pcir->sig[3]);
 		ret = -1;
 		goto out_unmap;
@@ -105,8 +105,8 @@ next:
 	       pcir->type == 0 ? " (x86 PC-AT)" : pcir->type == 3 ?
 	       " (EFI)" : "",pcir->vendor, pcir->device,
 	       pcir->class[2], pcir->class[1], pcir->class[0]);
-	printf("\tPCIR: revision %x, vendor revision: %x\n",
-	       pcir->pcir_rev, pcir->rom_rev);
+	printf("\tPCIR: image length %xh, revision %x, vendor revision: %x\n",
+	       pcir->image_length * 512, pcir->pcir_rev, pcir->rom_rev);
 
 	if (pcir->type == 3) {
 		int valid = header->header_sig == 0x0ef1;
